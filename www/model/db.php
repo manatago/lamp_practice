@@ -51,9 +51,8 @@ function execute_query($db, $sql, $params = array()){
 function stock_execute_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
-    var_dump($sql);
-    $statement->bindValue(':stock',$stock, PDO::PARAM_STR);
-    $statement->bindValue(':item_id',$item_id, PDO::PARAM_STR);
+    $statement->bindValue(1,$stock, PDO::PARAM_INT);
+    $statement->bindValue(2,$item_id, PDO::PARAM_STR);
     return $statement->execute($params);
   }catch(PDOException $e){
     set_error('更新に失敗しました。');

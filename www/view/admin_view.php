@@ -17,7 +17,7 @@
 
     <form 
       method="post" 
-      action="admin_insert_item.php" 
+      action="admin_insert_item.php='.$token.'" 
       enctype="multipart/form-data"
       class="add_item_form col-md-6">
       <div class="form-group">
