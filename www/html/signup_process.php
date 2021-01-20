@@ -3,6 +3,12 @@ require_once '../conf/const.php';
 require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  if ($token != $_SESSION['token']) {
+    redirect_to(LOGIN_URL);
+  }
+}
+
 session_start();
 
 if(is_logined() === true){

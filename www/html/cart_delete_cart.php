@@ -5,6 +5,12 @@ require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  if ($token != $_SESSION['token']) {
+    redirect_to(LOGIN_URL);
+  }
+}
+
 session_start();
 
 if(is_logined() === false){
