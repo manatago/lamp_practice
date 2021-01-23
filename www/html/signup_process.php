@@ -4,7 +4,7 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-  if ($token != $_SESSION['token']) {
+  if (is_valid_csrf_token($_POST['csrf'])    === false) {
     redirect_to(LOGIN_URL);
   }
 }
