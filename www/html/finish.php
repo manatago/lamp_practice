@@ -5,6 +5,12 @@ require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  if (is_valid_csrf_token($_POST['csrf'])    === false) {
+    redirect_to(LOGIN_URL);
+  }
+}
+
 session_start();
 
 if(is_logined() === false){
