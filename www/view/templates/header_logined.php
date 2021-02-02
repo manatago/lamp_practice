@@ -17,6 +17,12 @@
             <a class="nav-link" href="<?php print(ADMIN_URL);?>">管理</a>
           </li>
         <?php } ?>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/history.php">購入履歴</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/ranking.php">ランキングTOP３</a>
+        </li>
       </ul>
     </div>
   </nav>

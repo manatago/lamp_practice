@@ -4,13 +4,13 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 
+session_start();
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
   if (is_valid_csrf_token($_POST['csrf'])    === false) {
     redirect_to(LOGIN_URL);
   }
 }
 
-session_start();
 //ログイン出来てなければログイン画面へ戻る
 if(is_logined() === false){
   redirect_to(LOGIN_URL);

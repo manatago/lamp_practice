@@ -206,3 +206,93 @@ function is_valid_item_status($status){
   }
   return $is_valid;
 }
+
+function get_all_history($db,$user_id){
+  return get_history($db,$user_id);
+}
+
+function get_history($db, $user_id){
+var_dump($user_id);
+  if($user_id === 4){
+    $where = '';
+  }else{
+    $where=' where user_id = ? ';
+  }
+
+  $sql = "
+    SELECT
+      history.order_id,
+      history.datetime,
+      SUM(details.price * details.amount) AS total
+    FROM
+      history
+    JOIN
+      details
+    ON
+      history.order_id = details.order_id
+    {$where} 
+    GROUP BY
+      order_id
+    
+  ";
+  if($user_id === 4){
+    var_dump($sql);
+    return fetch_all_query($db, $sql);
+  }else{
+    return fetch_all_query($db, $sql, array($user_id));
+  }
+}
+
+function get_detail($db, $order_id, $user_id){
+  $sql = "
+    SELECT
+      details.name,
+      details.price,
+      details.amount,
+      (details.price * details.amount) AS subtotal,
+      history.user_id
+    FROM
+      details
+    JOIN
+      history
+    ON
+      history.order_id = details.order_id
+    WHERE
+      details.order_id = ?
+    AND
+      history.user_id= ?
+  ";
+  return fetch_all_query($db, $sql, array($order_id,$user_id));
+}
+
+function pull_get_items($db, $is_open = false){
+
+  if($_GET['kind'] === 'new'){
+    $where =' ORDER BY created DESC ';
+  }else if($_GET['kind']  === 'high'){
+    $where =' ORDER BY price DESC ';
+  }else if($_GET['kind'] === 'low' ){
+    $where =' ORDER BY price ';
+  }else{
+    $where = '';
+  }
+  $sql = "
+      SELECT
+        item_id, 
+        name,
+        stock,
+        price,
+        image,
+        status
+      FROM
+        items
+      {$where}
+    ";
+    if($is_open === true){
+      $sql .= '
+        WHERE status = 1
+      ';
+}
+
+return fetch_all_query($db, $sql);
+}

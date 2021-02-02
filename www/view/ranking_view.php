@@ -12,24 +12,15 @@
 
   <div class="container">
     <h1>商品一覧</h1>
-    <form method='GET' action='/index_change.php'>
-      <select name='kind'>
-        <option value='new'>新着順</option>
-        <option value='high'>価格（高）順</option>
-        <option value='low'>価格（低）順</option>
-      </select>
-    <input type='submit' value='並び替え' />
-    
-    </form>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <div class="card-deck">
       <div class="row">
-      <?php foreach($items as $item){ ?>
+      <?php foreach($items as $key => $item){ ?>
         <div class="col-6 item">
           <div class="card h-100 text-center">
             <div class="card-header">
-              <?php print($item['name']); ?>
+              <?php print(($key+1) .'位'.$item['name']); ?>
             </div>
             <figure class="card-body">
               <img class="card-img" src="<?php print(IMAGE_PATH . $item['image']); ?>">

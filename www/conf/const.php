@@ -33,6 +33,7 @@ define('USER_PASSWORD_LENGTH_MAX', 100);
 
 define('USER_TYPE_ADMIN', 1);
 define('USER_TYPE_NORMAL', 2);
+define('DATETIME','date->(Y-m-d H:i:s)');
 
 define('ITEM_NAME_LENGTH_MIN', 1);
 define('ITEM_NAME_LENGTH_MAX', 100);
